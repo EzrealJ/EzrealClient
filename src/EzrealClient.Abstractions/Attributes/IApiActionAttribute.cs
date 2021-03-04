@@ -1,0 +1,17 @@
+﻿using System.Threading.Tasks;
+
+namespace EzrealClient
+{
+    /// <summary>
+    /// 定义ApiAction修饰特性的行为
+    /// </summary>
+    public interface IApiActionAttribute : IAttributeMultiplable, IApiAttribute
+    {
+        /// <summary>
+        /// 请求前
+        /// </summary>
+        /// <param name="context">上下文</param> 
+        /// <returns></returns>
+        Task OnRequestAsync(ApiRequestContext context);
+    }
+}

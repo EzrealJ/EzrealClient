@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<Nullable>enable</Nullable>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+
+
+
+		<Description>EzrealClient的接口代理类代码生成扩展</Description>
+		<Summary>EzrealClient的接口代理类代码生成扩展</Summary>
+	</PropertyGroup>
+
+  <!--nuget analyzers和tools目录-->
+  <ItemGroup>
+    <None Include="NugetPackage\tools\*.*" PackagePath="tools" Pack="true" />
+    <None Include="NugetPackage\analyzers\dotnet\cs\**" PackagePath="analyzers\dotnet\cs" Pack="true" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\EzrealClient\EzrealClient.csproj" />
+  </ItemGroup>
+
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="dotnet publish ../../Analyzers/EzrealClient.Analyzers.SourceGenerator/EzrealClient.Analyzers.SourceGenerator.csproj -c Release -o NugetPackage/analyzers/dotnet/cs" />
+  </Target>
+</Project>

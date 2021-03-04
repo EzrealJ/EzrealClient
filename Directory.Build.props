@@ -1,4 +1,4 @@
-<Project>	
+<Project>
 	<PropertyGroup>
 		<Version>2.0.1</Version>
 		<Copyright>Copyright © laojiu 2017-2021</Copyright>
@@ -6,20 +6,15 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<Authors>laojiu</Authors>
-		<Company>laojiu</Company>		
+		<Authors>Ezreal</Authors>
+		<Company>Ezreal</Company>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PackageLicenseExpression>MIT</PackageLicenseExpression>
-		<PackageProjectUrl>https://github.com/dotnetcore/WebApiClient</PackageProjectUrl>
-		<PackageIcon>icon.png</PackageIcon>
+		<PackageProjectUrl>https://github.com/EzrealJ/EzrealClient</PackageProjectUrl>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="..\icon.png">
-			<Pack>True</Pack>
-			<PackagePath></PackagePath>
-		</None>
 		<None Include="..\.editorconfig" Link=".editorconfig" />
 	</ItemGroup>
 </Project>

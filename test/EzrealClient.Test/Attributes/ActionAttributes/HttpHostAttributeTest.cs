@@ -1,0 +1,26 @@
+﻿using System;
+using System.Threading.Tasks;
+using EzrealClient.Attributes;
+using EzrealClient.Implementations;
+using Xunit;
+
+namespace EzrealClient.Test.Attributes.ActionAttributes
+{
+    public class HttpHostAttributeTest
+    {
+        [Fact]
+        public async Task OnRequestAsyncTest()
+        {
+            var apiAction = new DefaultApiActionDescriptor(typeof(ITestApi).GetMethod("PostAsync"));
+            var context = new TestRequestContext(apiAction, string.Empty);
+
+            Assert.Throws<ArgumentNullException>(() => new HttpHostAttribute(null));
+            Assert.Throws<UriFormatException>(() => new HttpHostAttribute("/"));
+
+            context.HttpContext.RequestMessage.RequestUri = null;
+            var attr = new HttpHostAttribute("http://www.webapiclient.com");
+            await attr.OnRequestAsync(context);
+            Assert.True(context.HttpContext.RequestMessage.RequestUri == new Uri("http://www.webapiclient.com"));
+        }
+    }
+}

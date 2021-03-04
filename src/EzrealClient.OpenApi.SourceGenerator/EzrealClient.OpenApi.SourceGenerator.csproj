@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  
+    <Summary>将本地或远程OpenApi文档解析生成EzrealClient的接口定义代码文件的工具</Summary>
+    <SatelliteResourceLanguages>zh-Hans</SatelliteResourceLanguages>
+
+    <Description>将OpenApi的本地或远程文档解析生成EzrealClient的接口定义代码文件</Description>
+    <Summary>将OpenApi的本地或远程文档解析生成EzrealClient的接口定义代码文件</Summary>
+
+    <PackAsTool>true</PackAsTool>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.8.0" />
+    <PackageReference Include="RazorEngineCore" Version="2020.6.1" />
+    <PackageReference Include="NSwag.CodeGeneration.CSharp" Version="13.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="petstore.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Views\HttpApi.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Views\HttpModel.cshtml">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>
