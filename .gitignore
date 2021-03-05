@@ -342,3 +342,4 @@ healthchecksdb
 # nuget
 src/EzrealClient/NugetPackage/analyzers/
 src/Extensions/EzrealClient.Extensions.SourceGenerator/NugetPackage/analyzers/
+src/Extensions/EzrealClient.Extensions.SourceGenerator/NugetPackage/analyzers/dotnet/cs/EzrealClient.Analyzers.SourceGenerator.dll
