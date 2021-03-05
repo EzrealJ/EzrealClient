@@ -6,7 +6,7 @@ namespace EzrealClient
     /// <summary>
     /// string扩展
     /// </summary>
-    static class StringExtensions
+   internal static class StringExtensions
     {
         /// <summary>
         /// 格式化字符串

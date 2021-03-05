@@ -10,7 +10,7 @@ namespace EzrealClient
     /// <summary>
     /// 类型扩展
     /// </summary>
-    static class TypeExtensions
+   internal static class TypeExtensions
     {
         /// <summary>
         /// 类型的默认值缓存

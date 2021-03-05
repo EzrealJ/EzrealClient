@@ -1,5 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
 using System.Text.RegularExpressions;
+using EzrealClient;
 
 namespace EzrealClient.Benchmarks.StringReplaces
 {
