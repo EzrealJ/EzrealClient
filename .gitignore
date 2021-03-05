@@ -339,6 +339,6 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 
-# nuget���Ŀ¼�ķ�����
+# nuget
 src/EzrealClient/NugetPackage/analyzers/
 src/Extensions/EzrealClient.Extensions.SourceGenerator/NugetPackage/analyzers/
