@@ -339,6 +339,6 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 
-# nuget´ò°üÄ¿Â¼µÄ·ÖÎöÆ÷
-WebApiClientCore/NugetPackage/analyzers/
-WebApiClientCore.Extensions.SourceGenerator/NugetPackage/analyzers/
+# nugetï¿½ï¿½ï¿½Ä¿Â¼ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½
+src/EzrealClient/NugetPackage/analyzers/
+src/Extensions/EzrealClient.Extensions.SourceGenerator/NugetPackage/analyzers/
