@@ -9,6 +9,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\src\Extensions\EzrealClient.Extensions.OAuths\EzrealClient.Extensions.OAuths.csproj" />
+	  <ProjectReference Include="..\..\src\Extensions\EzrealClient.Extensions.SourceGenerator\EzrealClient.Extensions.SourceGenerator.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
