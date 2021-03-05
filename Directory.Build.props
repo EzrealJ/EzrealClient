@@ -1,7 +1,7 @@
 <Project>
 	<PropertyGroup>
 		<Version>2.0.1</Version>
-		<Copyright>Copyright © laojiu 2017-2021</Copyright>
+		<Copyright>Copyright © Ezreal 2021</Copyright>
 		<NoWarn>IDE0057</NoWarn>
 	</PropertyGroup>
 
