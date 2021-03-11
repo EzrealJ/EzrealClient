@@ -4,6 +4,6 @@
 ### 使用方法
 ```
 services
-    .AddWebApiClient()
+    .AddEzrealClient()
     .UseSourceGeneratorHttpApiActivator();
 ```

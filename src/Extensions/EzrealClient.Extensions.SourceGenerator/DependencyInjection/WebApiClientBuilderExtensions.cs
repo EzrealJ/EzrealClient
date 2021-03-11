@@ -4,9 +4,9 @@ using EzrealClient.Implementations;
 namespace Microsoft.Extensions.DependencyInjection
 {
     /// <summary>
-    /// IWebApiClientBuilder扩展
+    /// IEzrealClientBuilder扩展
     /// </summary>
-    public static class WebApiClientBuilderExtensions
+    public static class EzrealClientBuilderExtensions
     {
         /// <summary>
         /// 编译时使用SourceGenerator生成接口的代理类型代码
@@ -19,7 +19,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </remarks>
         /// <param name="builder"></param>
         /// <returns></returns>
-        public static IWebApiClientBuilder UseSourceGeneratorHttpApiActivator(this IWebApiClientBuilder builder)
+        public static IEzrealClientBuilder UseSourceGeneratorHttpApiActivator(this IEzrealClientBuilder builder)
         {
             builder.Services.AddSingleton(typeof(IHttpApiActivator<>), typeof(SourceGeneratorHttpApiActivator<>));
             return builder;

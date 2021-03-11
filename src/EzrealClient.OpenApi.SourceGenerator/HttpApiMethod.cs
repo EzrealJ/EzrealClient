@@ -8,12 +8,12 @@ using System.Text.RegularExpressions;
 namespace EzrealClient.OpenApi.SourceGenerator
 {
     /// <summary>
-    /// 表示WebApiClient的请求方法数据模型
+    /// 表示EzrealClient的请求方法数据模型
     /// </summary>
     public class HttpApiMethod : CSharpOperationModel
     {
         /// <summary>
-        /// WebApiClient的请求方法数据模型
+        /// EzrealClient的请求方法数据模型
         /// </summary>
         /// <param name="operation">Swagger操作</param>
         /// <param name="settings">设置项</param>

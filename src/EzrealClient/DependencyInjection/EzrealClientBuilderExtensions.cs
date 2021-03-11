@@ -1,16 +1,18 @@
 ﻿using Microsoft.Extensions.DependencyInjection.Extensions;
 using EzrealClient;
 using EzrealClient.Implementations;
+using System;
+using EzrealClient.FluentApi.Builders;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
     /// <summary>
-    /// IWebApiClientBuilder扩展
+    /// IEzrealClientBuilder扩展
     /// </summary>
-    public static class WebApiClientBuilderExtensions
+    public static class EzrealClientBuilderExtensions
     {
         /// <summary>
-        /// 添加WebApiClient全局默认配置
+        /// 添加EzrealClient全局默认配置
         /// </summary>
         /// <remarks>
         /// <para>• 尝试使用DefaultHttpApiActivator，运行时使用Emit动态创建THttpApi的代理类和代理类实例</para>
@@ -20,7 +22,7 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </remarks> 
         /// <param name="services"></param>
         /// <returns></returns>
-        public static IWebApiClientBuilder AddWebApiClient(this IServiceCollection services)
+        public static IEzrealClientBuilder AddEzrealClient(this IServiceCollection services)
         {
             services.AddOptions();
             services.AddMemoryCache();
@@ -30,7 +32,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.TryAddSingleton<IApiActionInvokerProvider, DefaultApiActionInvokerProvider>();
             services.TryAddSingleton<IResponseCacheProvider, DefaultResponseCacheProvider>();
 
-            return new WebApiClientBuilder(services);
+            return new EzrealClientBuilder(services);
         }
 
         /// <summary>
@@ -39,23 +41,29 @@ namespace Microsoft.Extensions.DependencyInjection
         /// </summary>
         /// <param name="builder"></param>
         /// <returns></returns>
-        public static IWebApiClientBuilder UseJsonFirstApiActionDescriptor(this IWebApiClientBuilder builder)
+        public static IEzrealClientBuilder UseJsonFirstApiActionDescriptor(this IEzrealClientBuilder builder)
         {
             builder.Services.AddSingleton<IApiActionDescriptorProvider, JsonFirstApiActionDescriptorProvider>();
             return builder;
         }
 
+
+        public static IEzrealClientBuilder UseFluentApi(this IEzrealClientBuilder builder,Action<FluentApiAttributesDescriptorBuilder> builderAction)
+        {
+            builder.Services.AddSingleton(builderAction);
+            return builder;
+        }
         /// <summary>
-        /// WebApiClient全局配置的Builder
+        /// EzrealClient全局配置的Builder
         /// </summary>
-        private class WebApiClientBuilder : IWebApiClientBuilder
+        private class EzrealClientBuilder : IEzrealClientBuilder
         {
             /// <summary>
             /// 获取服务集合
             /// </summary>
             public IServiceCollection Services { get; }
 
-            public WebApiClientBuilder(IServiceCollection services)
+            public EzrealClientBuilder(IServiceCollection services)
             {
                 this.Services = services;
             }

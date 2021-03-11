@@ -54,7 +54,7 @@ namespace EzrealClient.OpenApi.SourceGenerator
 
         /// <summary>
         /// 转换代码
-        /// 将NSwag生成的模型代码转换为WebApiClient的模型代码
+        /// 将NSwag生成的模型代码转换为EzrealClient的模型代码
         /// </summary>
         /// <param name="nswagCode"></param>
         /// <returns></returns>

@@ -22,7 +22,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             var name = HttpApi.GetName(typeof(THttpApi));
 
-            services.AddWebApiClient();
+            services.AddEzrealClient();
             services.NamedHttpApiType(name, typeof(THttpApi));
             services.TryAddSingleton(typeof(HttpApiProvider<>));
             services.TryAddTransient(serviceProvider =>

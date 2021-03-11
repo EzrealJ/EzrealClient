@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "WebApiClient.Tools.Swagger": {
+    "EzrealClient.Tools.Swagger": {
       "commandName": "Project",
       "commandLineArgs": "-o petstore.json"
     }

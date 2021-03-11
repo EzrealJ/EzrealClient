@@ -61,7 +61,7 @@ namespace EzrealClient.Analyzers {
         }
         
         /// <summary>
-        ///   查找类似 https://github.com/dotnetcore/WebApiClient 的本地化字符串。
+        ///   查找类似 https://github.com/dotnetcore/EzrealClient 的本地化字符串。
         /// </summary>
         internal static string helpLinkUri {
             get {

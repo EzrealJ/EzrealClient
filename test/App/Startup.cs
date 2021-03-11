@@ -46,7 +46,7 @@ namespace App
 
             // 应用编译时生成接口的代理类型代码
             services
-                .AddWebApiClient()
+                .AddEzrealClient()
                 .UseJsonFirstApiActionDescriptor()
                 .UseSourceGeneratorHttpApiActivator();
 

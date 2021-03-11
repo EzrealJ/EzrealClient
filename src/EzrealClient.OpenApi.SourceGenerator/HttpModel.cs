@@ -3,7 +3,7 @@
 namespace EzrealClient.OpenApi.SourceGenerator
 {
     /// <summary>
-    /// 表示WebApiClient的模型描述
+    /// 表示EzrealClient的模型描述
     /// </summary>
     public class HttpModel : CSharpCode
     {
@@ -13,7 +13,7 @@ namespace EzrealClient.OpenApi.SourceGenerator
         public string NameSapce { get; }
 
         /// <summary>
-        /// WebApiClient的模型描述
+        /// EzrealClient的模型描述
         /// </summary>
         /// <param name="codeArtifact">源代码</param>
         /// <param name="nameSpace">命名空间</param>

@@ -10,7 +10,7 @@ namespace EzrealClient.Test.BuildinExtensions
             var str = "EzrealClient.Benchmarks.StringReplaces.EzrealClient";
             var newStr = str.RepaceIgnoreCase("core", "CORE", out var replaced);
             Assert.True(replaced);
-            Assert.Equal("WebApiClientCORE.Benchmarks.StringReplaces.WebApiClientCORE", newStr);
+            Assert.Equal("EzrealClientCORE.Benchmarks.StringReplaces.EzrealClientCORE", newStr);
 
             str = "AbccBAd";
             var newStr2 = str.RepaceIgnoreCase("A", "x", out replaced);

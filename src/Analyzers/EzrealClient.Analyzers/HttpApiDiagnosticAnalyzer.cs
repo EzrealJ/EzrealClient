@@ -9,7 +9,7 @@ using EzrealClient.Analyzers.Providers;
 namespace EzrealClient.Analyzers
 {
     /// <summary>
-    /// 表示WebApiClient诊断分析器
+    /// 表示EzrealClient诊断分析器
     /// </summary>
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class HttpApiDiagnosticAnalyzer : DiagnosticAnalyzer

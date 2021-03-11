@@ -22,7 +22,7 @@ namespace EzrealClient.OpenApi.SourceGenerator
         public string NameSpace { get; set; } = "EzrealClient";
 
         /// <summary>
-        /// WebApiClient接口设置模型
+        /// EzrealClient接口设置模型
         /// </summary>
         public HttpApiSettings()
         {

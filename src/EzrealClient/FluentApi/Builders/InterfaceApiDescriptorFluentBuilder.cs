@@ -16,7 +16,7 @@ namespace EzrealClient.FluentApi.Builders
         /// <param name="metadata">元数据</param>
         public InterfaceApiDescriptorFluentBuilder(InterfaceApiActionDescriptorMetadata metadata)
         {
-            Metadata = metadata;
+            Metadata = metadata ?? throw new ArgumentNullException(nameof(metadata));
         }
         /// <summary>
         /// 接口API描述流式构建器所服务的接口
@@ -26,6 +26,12 @@ namespace EzrealClient.FluentApi.Builders
         /// 
         /// </summary>
         public InterfaceApiActionDescriptorMetadata Metadata { get; }
+
+
+        public InterfaceApiDescriptorFluentBuilder ToHost(string host)
+        {
+            Metadata.InterfaceApiActionDescriptor.Attributes;
+        }
     }
     /// <summary>
     /// 泛型的接口API描述流式构建器

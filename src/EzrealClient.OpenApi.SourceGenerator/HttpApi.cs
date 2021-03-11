@@ -9,7 +9,7 @@ using System.Linq;
 namespace EzrealClient.OpenApi.SourceGenerator
 {
     /// <summary>
-    /// 表示WebApiClient的接口数据模型
+    /// 表示EzrealClient的接口数据模型
     /// </summary>
     [DebuggerDisplay("TypeName = {TypeName}")]
     public class HttpApi : CSharpControllerTemplateModel
@@ -35,7 +35,7 @@ namespace EzrealClient.OpenApi.SourceGenerator
         }
 
         /// <summary>
-        /// WebApiClient的接口数据模型
+        /// EzrealClient的接口数据模型
         /// </summary>
         /// <param name="className">类名</param>
         /// <param name="operations">swagger操作</param>

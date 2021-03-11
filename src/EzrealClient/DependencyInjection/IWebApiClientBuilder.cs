@@ -1,9 +1,9 @@
 ﻿namespace Microsoft.Extensions.DependencyInjection
 {
     /// <summary>
-    /// WebApiClient全局配置的Builder接口
+    /// EzrealClient全局配置的Builder接口
     /// </summary>
-    public interface IWebApiClientBuilder
+    public interface IEzrealClientBuilder
     {
         /// <summary>
         /// 获取服务集合
