@@ -1,4 +1,5 @@
 using App.Clients;
+using EzrealClient.Attributes;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -48,7 +49,20 @@ namespace App
             services
                 .AddEzrealClient()
                 .UseJsonFirstApiActionDescriptor()
-                .UseSourceGeneratorHttpApiActivator();
+                .UseSourceGeneratorHttpApiActivator()
+                .UseFluentConfigure(builder => {
+                    builder.SetCacheAttribute(new CacheAttribute(500));
+                    builder.ConfigureInterface<IUserApi>(interfaceBuilder=> {                       
+                        interfaceBuilder.ConfigureMethod(nameof(IUserApi.GetAsync), methodBuilder =>
+                        {
+                            //methodBuilder
+                        });
+
+
+                    });
+                
+                
+                });
 
             // ×¢²áuserApi
             services.AddHttpApi(typeof(IUserApi), o =>

@@ -1,24 +1,22 @@
 ﻿using EzrealClient.Implementations;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Linq;
 
 namespace EzrealClient.FluentApi.Builders.Metadata
 {
-    public class NameSpaceFluentMetadata:IFluentMethodAnnotableMetadata
+    public class FluentMetadata : IFluentMethodAnnotableMetadata
     {
-        public NameSpaceFluentMetadata(string @namespace, AssemblyFluentMetadata assemblyMetadata)
+        public FluentMetadata()
         {
-            Name = @namespace;
-            AssemblyMetadata = assemblyMetadata;
+       
             ApiActionAttributes = new List<IApiActionAttribute>();
             ApiFilterAttributes = new List<IApiFilterAttribute>();
             ApiReturnAttributes = new List<IApiReturnAttribute>();
             Properties = new Dictionary<object, object>();
-            Interfaces = new List<InterfaceFluentMetadata>();
+            Assemblys = new List<AssemblyFluentMetadata>();
         }
 
         public virtual IApiCacheAttribute? CacheAttribute { get; protected set; }
@@ -29,20 +27,10 @@ namespace EzrealClient.FluentApi.Builders.Metadata
 
         public virtual IEnumerable<IApiReturnAttribute> ApiReturnAttributes { get; protected set; }
 
-        public virtual Dictionary<object, object> Properties { get; protected set; }
-        /// <summary>
-        /// 获取命名空间
-        /// </summary>
-        public virtual string Name { get; protected set; }
+        public virtual Dictionary<object, object>? Properties { get; protected set; }
 
 
-        public AssemblyFluentMetadata AssemblyMetadata { get; set; }
-
-        /// <summary>
-        /// 接口
-        /// </summary>
-        public virtual IEnumerable<InterfaceFluentMetadata> Interfaces { get; protected set; }
-
+        public virtual IEnumerable<AssemblyFluentMetadata> Assemblys { get; protected set; }
 
         public void SetCacheAttribute(IApiCacheAttribute apiCacheAttribute)
         {

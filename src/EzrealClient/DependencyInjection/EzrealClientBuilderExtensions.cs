@@ -48,7 +48,7 @@ namespace Microsoft.Extensions.DependencyInjection
         }
 
 
-        public static IEzrealClientBuilder UseFluentApi(this IEzrealClientBuilder builder,Action<FluentApiAttributesDescriptorBuilder> builderAction)
+        public static IEzrealClientBuilder UseFluentConfigure(this IEzrealClientBuilder builder,Action<FluentApiAttributesDescriptorBuilder> builderAction)
         {
             builder.Services.AddSingleton(builderAction);
             return builder;

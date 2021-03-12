@@ -8,6 +8,12 @@ namespace EzrealClient.FluentApi.Builders.Metadata
 {
     public class ParameterFluentMetadata
     {
+        public ParameterFluentMetadata(ParameterInfo parameterInfo, MethodFluentMetadata metadata)
+        {
+            Member = parameterInfo;
+            MethodMetadata = metadata;
+        }
+
         /// <summary>
         /// 获取参数名称
         /// </summary>
@@ -16,7 +22,7 @@ namespace EzrealClient.FluentApi.Builders.Metadata
         /// <summary>
         /// 获取关联的参数信息
         /// </summary>
-        public ParameterInfo? Member { get; protected set; }
+        public ParameterInfo Member { get; protected set; }
 
         /// <summary>
         /// 获取参数索引
@@ -26,7 +32,7 @@ namespace EzrealClient.FluentApi.Builders.Metadata
         /// <summary>
         /// 获取参数类型
         /// </summary>
-        public Type? ParameterType { get; protected set; }
+        public Type ParameterType => Member.ParameterType;
 
         /// <summary>
         /// 获取关联的参数特性
@@ -37,5 +43,7 @@ namespace EzrealClient.FluentApi.Builders.Metadata
         /// 获取关联的ValidationAttribute特性
         /// </summary>
         public IEnumerable<ValidationAttribute>? ValidationAttributes { get; protected set; }
+
+        public MethodFluentMetadata MethodMetadata { get; }
     }
 }
