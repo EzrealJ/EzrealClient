@@ -33,7 +33,7 @@ namespace EzrealClient.Implementations
         /// </summary>
         /// <param name="key">键</param>
         /// <returns></returns>
-        public Task<ResponseCacheResult> GetAsync(string key)
+        public System.Threading.Tasks.Task<ResponseCacheResult> GetAsync(string key)
         {
             if (this.cache.TryGetValue(key, out var value) == false)
             {

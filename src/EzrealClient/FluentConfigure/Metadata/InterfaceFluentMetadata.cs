@@ -1,22 +1,24 @@
 ﻿using EzrealClient.Implementations;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Linq;
 
-namespace EzrealClient.FluentApi.Builders.Metadata
+namespace EzrealClient.FluentConfigure.Metadata
 {
-    public class FluentMetadata : IFluentMethodAnnotableMetadata
+   public class InterfaceFluentMetadata:IFluentMethodAnnotableMetadata
     {
-        public FluentMetadata()
+        public InterfaceFluentMetadata(Type interfaceType, NameSpaceFluentMetadata metadata)
         {
-       
+            InterfaceType = interfaceType;
+            NameSpaceMetadata = metadata;
             ApiActionAttributes = new List<IApiActionAttribute>();
             ApiFilterAttributes = new List<IApiFilterAttribute>();
             ApiReturnAttributes = new List<IApiReturnAttribute>();
             Properties = new Dictionary<object, object>();
-            Assemblys = new List<AssemblyFluentMetadata>();
+            Methods = new List<MethodFluentMetadata>();
         }
 
         public virtual IApiCacheAttribute? CacheAttribute { get; protected set; }
@@ -27,10 +29,34 @@ namespace EzrealClient.FluentApi.Builders.Metadata
 
         public virtual IEnumerable<IApiReturnAttribute> ApiReturnAttributes { get; protected set; }
 
-        public virtual Dictionary<object, object>? Properties { get; protected set; }
+        public virtual Dictionary<object, object> Properties { get; protected set; }
 
 
-        public virtual IEnumerable<AssemblyFluentMetadata> Assemblys { get; protected set; }
+        public virtual Type InterfaceType { get; protected set; }
+
+ 
+        public virtual TypeInfo TypeInfo => InterfaceType.GetTypeInfo();
+ 
+        public virtual IEnumerable<MethodFluentMetadata> Methods { get; protected set; }
+
+
+        public virtual MethodFluentMetadata GetOrAddMethodMetadata(MethodInfo method)
+        {
+            if (method is null)
+            {
+                throw new System.ArgumentNullException(nameof(method));
+            }
+            MethodFluentMetadata? metadata = Methods.FirstOrDefault(a => a.Member == method);
+            if (metadata == null)
+            {
+                metadata = new MethodFluentMetadata(method, this);
+                ((List<MethodFluentMetadata>)Methods).Add(metadata);
+            }
+            return metadata;
+        }
+
+        public NameSpaceFluentMetadata NameSpaceMetadata { get; }
+
 
         public void SetCacheAttribute(IApiCacheAttribute apiCacheAttribute)
         {
@@ -67,7 +93,7 @@ namespace EzrealClient.FluentApi.Builders.Metadata
             return true;
         }
 
-        public bool TryAddPropertie(object key, object? value)
+        public bool TryAddPropertie(object key, object value)
         {
             return Properties.TryAdd(key, value);
         }

@@ -29,7 +29,7 @@ namespace EzrealClient.Implementations.Tasks
         /// 创建新的请求任务
         /// </summary>
         /// <returns></returns>
-        protected override Task<TResult> InvokeAsync()
+        protected override System.Threading.Tasks.Task<TResult> InvokeAsync()
         {
             return this.invoker.InvokeAsync(this.context, this.arguments);
         }

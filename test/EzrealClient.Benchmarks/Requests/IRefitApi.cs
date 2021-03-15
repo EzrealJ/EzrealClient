@@ -6,12 +6,12 @@ namespace EzrealClient.Benchmarks.Requests
     public interface IRefitApi
     {
         [Get("/benchmarks/{id}")]
-        Task<Model> GetAsyc(string id);
+        System.Threading.Tasks.Task<Model> GetAsyc(string id);
 
         [Post("/benchmarks")]
-        Task<Model> PostJsonAsync([Body(BodySerializationMethod.Serialized)]Model model);
+        System.Threading.Tasks.Task<Model> PostJsonAsync([Body(BodySerializationMethod.Serialized)]Model model);
 
         [Put("/benchmarks/{id}")]
-        Task<Model> PutFormAsync(string id, [Body(BodySerializationMethod.UrlEncoded)]Model model);
+        System.Threading.Tasks.Task<Model> PutFormAsync(string id, [Body(BodySerializationMethod.UrlEncoded)]Model model);
     }
 }

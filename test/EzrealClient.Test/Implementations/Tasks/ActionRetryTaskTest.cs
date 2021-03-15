@@ -12,7 +12,7 @@ namespace EzrealClient.Test.Implementations.Tasks
         {
             public T Result { get; set; }
 
-            protected override Task<T> InvokeAsync()
+            protected override System.Threading.Tasks.Task<T> InvokeAsync()
             {
                 return Task.FromResult(Result);
             }
@@ -20,7 +20,7 @@ namespace EzrealClient.Test.Implementations.Tasks
 
         class NotImplementedApiTask<T> : TaskBase<T>
         {
-            protected override Task<T> InvokeAsync()
+            protected override System.Threading.Tasks.Task<T> InvokeAsync()
             {
                 throw new NotImplementedException();
             }

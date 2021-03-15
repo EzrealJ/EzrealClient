@@ -6,7 +6,7 @@ namespace EzrealClient
     /// 定义返回结果的行为
     /// </summary>
     /// <typeparam name="TResult"></typeparam>
-    public interface ITask<TResult>
+    public interface Task<TResult>
     {
         /// <summary>
         /// 返回新创建的请求任务的等待器

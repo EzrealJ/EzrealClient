@@ -35,6 +35,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EzrealClient.Extensions.OAu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EzrealClient.Extensions.SourceGenerator", "src\Extensions\EzrealClient.Extensions.SourceGenerator\EzrealClient.Extensions.SourceGenerator.csproj", "{99AC18B8-263E-430D-B5E6-2018EB548F12}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "test\ConsoleApp\ConsoleApp.csproj", "{F70A1D70-3664-4C86-BB31-9C7C3EF0482D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -89,6 +91,10 @@ Global
 		{99AC18B8-263E-430D-B5E6-2018EB548F12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99AC18B8-263E-430D-B5E6-2018EB548F12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99AC18B8-263E-430D-B5E6-2018EB548F12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F70A1D70-3664-4C86-BB31-9C7C3EF0482D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F70A1D70-3664-4C86-BB31-9C7C3EF0482D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F70A1D70-3664-4C86-BB31-9C7C3EF0482D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F70A1D70-3664-4C86-BB31-9C7C3EF0482D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,6 +114,7 @@ Global
 		{0DA921D6-6E56-4E65-99AD-E4F36AEA40D7} = {6CC7D9EC-C6E9-47FC-8E7E-AD8AEE62B154}
 		{90BE287C-14AC-424F-8A66-FBC464E83CFD} = {6CC7D9EC-C6E9-47FC-8E7E-AD8AEE62B154}
 		{99AC18B8-263E-430D-B5E6-2018EB548F12} = {6CC7D9EC-C6E9-47FC-8E7E-AD8AEE62B154}
+		{F70A1D70-3664-4C86-BB31-9C7C3EF0482D} = {6BF498F7-621F-47C3-94E5-20294E45167A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {915190C5-E5CB-440F-84B4-AE76368EA776}

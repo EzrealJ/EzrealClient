@@ -13,7 +13,7 @@ namespace EzrealClient.Implementations
         /// </summary>
         /// <param name="request">请求上下文</param>
         /// <returns></returns>
-        public static async Task<ApiResponseContext> ExecuteAsync(ApiRequestContext request)
+        public static async System.Threading.Tasks.Task<ApiResponseContext> ExecuteAsync(ApiRequestContext request)
         {
             await HandleRequestAsync(request).ConfigureAwait(false);
             var response = await ApiRequestSender.SendAsync(request).ConfigureAwait(false);

@@ -1,24 +1,22 @@
 ﻿using EzrealClient.Implementations;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Text;
-using System.Linq;
 
-namespace EzrealClient.FluentApi.Builders.Metadata
+namespace EzrealClient.FluentConfigure.Metadata
 {
-   public class InterfaceFluentMetadata:IFluentMethodAnnotableMetadata
+    public class FluentMetadata : IFluentMethodAnnotableMetadata
     {
-        public InterfaceFluentMetadata(Type interfaceType, NameSpaceFluentMetadata metadata)
+        public FluentMetadata()
         {
-            InterfaceType = interfaceType;
-            NameSpaceMetadata = metadata;
+       
             ApiActionAttributes = new List<IApiActionAttribute>();
             ApiFilterAttributes = new List<IApiFilterAttribute>();
             ApiReturnAttributes = new List<IApiReturnAttribute>();
             Properties = new Dictionary<object, object>();
-            Methods = new List<MethodFluentMetadata>();
+            Assemblys = new List<AssemblyFluentMetadata>();
         }
 
         public virtual IApiCacheAttribute? CacheAttribute { get; protected set; }
@@ -32,13 +30,24 @@ namespace EzrealClient.FluentApi.Builders.Metadata
         public virtual Dictionary<object, object> Properties { get; protected set; }
 
 
-        public virtual Type InterfaceType { get; protected set; }
+        public virtual IEnumerable<AssemblyFluentMetadata> Assemblys { get; protected set; }
 
- 
-        public virtual TypeInfo TypeInfo => InterfaceType.GetTypeInfo();
- 
-        public virtual IEnumerable<MethodFluentMetadata> Methods { get; protected set; }
-        public NameSpaceFluentMetadata NameSpaceMetadata { get; }
+
+        public virtual AssemblyFluentMetadata GetOrAddAssemblyMetadata(Assembly assembly)
+        {
+            if (assembly is null)
+            {
+                throw new ArgumentNullException(nameof(assembly));
+            }
+
+            AssemblyFluentMetadata metadata = Assemblys.FirstOrDefault(a => a.Assembly == assembly);
+            if (metadata == null)
+            {
+                metadata = new AssemblyFluentMetadata(assembly, this);
+                ((List<AssemblyFluentMetadata>)Assemblys).Add(metadata);
+            }
+            return metadata;
+        }
 
 
         public void SetCacheAttribute(IApiCacheAttribute apiCacheAttribute)
@@ -62,7 +71,7 @@ namespace EzrealClient.FluentApi.Builders.Metadata
             {
                 return false;
             }
-            ((List<IApiFilterAttribute>)ApiActionAttributes).Add(apiFilterAttribute);
+            ((List<IApiFilterAttribute>)ApiFilterAttributes).Add(apiFilterAttribute);
             return true;
         }
 
@@ -76,7 +85,7 @@ namespace EzrealClient.FluentApi.Builders.Metadata
             return true;
         }
 
-        public bool TryAddPropertie(object key, object? value)
+        public bool TryAddPropertie(object key, object value)
         {
             return Properties.TryAdd(key, value);
         }

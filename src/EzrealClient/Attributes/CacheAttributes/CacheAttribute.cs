@@ -75,7 +75,7 @@ namespace EzrealClient.Attributes
         /// </summary>
         /// <param name="context">上下文</param>
         /// <returns></returns>
-        public override Task<string> GetCacheKeyAsync(ApiRequestContext context)
+        public override System.Threading.Tasks.Task<string> GetCacheKeyAsync(ApiRequestContext context)
         {
             var request = context.HttpContext.RequestMessage;
             if (request.RequestUri == null)

@@ -6,6 +6,6 @@ namespace EzrealClient.Test.Parameters
 {
     public interface ITestApi 
     {
-        Task<HttpResponseMessage> PostAsync(object value);
+        System.Threading.Tasks.Task<HttpResponseMessage> PostAsync(object value);
     }
 }

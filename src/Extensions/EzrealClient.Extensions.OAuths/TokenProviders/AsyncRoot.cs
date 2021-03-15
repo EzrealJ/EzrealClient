@@ -47,7 +47,7 @@ namespace EzrealClient.Extensions.OAuths.TokenProviders
         /// using( await asyncRoot.LockAsync() ){ }
         /// </summary>
         /// <returns></returns>
-        public async Task<IDisposable> LockAsync()
+        public async System.Threading.Tasks.Task<IDisposable> LockAsync()
         {
             await this.semaphoreSlim.WaitAsync().ConfigureAwait(false);
             return new UnLocker(this);

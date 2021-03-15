@@ -11,7 +11,7 @@ namespace EzrealClient.Test.Implementations.TypeAttributes
     {
         public interface IMyApi
         {
-            ITask<HttpResponseMessage> PostAsync(HttpContent content);
+            Task<HttpResponseMessage> PostAsync(HttpContent content);
         }
 
         [Fact]

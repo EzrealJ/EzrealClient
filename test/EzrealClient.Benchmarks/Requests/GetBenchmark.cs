@@ -16,7 +16,7 @@ namespace EzrealClient.Benchmarks.Requests
         /// </summary>
         /// <returns></returns>
         [Benchmark]
-        public async Task<Model> HttpClient_GetAsync()
+        public async System.Threading.Tasks.Task<Model> HttpClient_GetAsync()
         {
             using var scope = this.ServiceProvider.CreateScope();
             var httpClient = scope.ServiceProvider.GetRequiredService<IHttpClientFactory>().CreateClient(typeof(HttpClient).FullName);
@@ -34,7 +34,7 @@ namespace EzrealClient.Benchmarks.Requests
         /// </summary>
         /// <returns></returns>
         [Benchmark]
-        public async Task<Model> EzrealClient_GetAsync()
+        public async System.Threading.Tasks.Task<Model> EzrealClient_GetAsync()
         {
             using var scope = this.ServiceProvider.CreateScope();
             var banchmarkApi = scope.ServiceProvider.GetRequiredService<IEzrealClientApi>();
@@ -47,7 +47,7 @@ namespace EzrealClient.Benchmarks.Requests
         /// </summary>
         /// <returns></returns>
         [Benchmark]
-        public async Task<Model> Refit_GetAsync()
+        public async System.Threading.Tasks.Task<Model> Refit_GetAsync()
         {
             using var scope = this.ServiceProvider.CreateScope();
             var banchmarkApi = scope.ServiceProvider.GetRequiredService<IRefitApi>();

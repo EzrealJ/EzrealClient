@@ -17,7 +17,7 @@ namespace EzrealClient
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         /// <returns></returns>
-        public static IRetryTask<TResult> Retry<TResult>(this ITask<TResult> task, int maxCount)
+        public static IRetryTask<TResult> Retry<TResult>(this Task<TResult> task, int maxCount)
         {
             return task.Retry(maxCount, null);
         }
@@ -32,7 +32,7 @@ namespace EzrealClient
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         /// <returns></returns>
-        public static IRetryTask<TResult> Retry<TResult>(this ITask<TResult> task, int maxCount, TimeSpan delay)
+        public static IRetryTask<TResult> Retry<TResult>(this Task<TResult> task, int maxCount, TimeSpan delay)
         {
             return task.Retry(maxCount, (i) => delay);
         }
@@ -47,7 +47,7 @@ namespace EzrealClient
         /// <exception cref="ArgumentOutOfRangeException"></exception>
         /// <exception cref="ArgumentNullException"></exception>
         /// <returns></returns>
-        public static IRetryTask<TResult> Retry<TResult>(this ITask<TResult> task, int maxCount, Func<int, TimeSpan>? delay)
+        public static IRetryTask<TResult> Retry<TResult>(this Task<TResult> task, int maxCount, Func<int, TimeSpan>? delay)
         {
             if (task == null)
             {
@@ -68,7 +68,7 @@ namespace EzrealClient
         /// <param name="task"></param> 
         /// <exception cref="ArgumentNullException"></exception>
         /// <returns></returns>
-        public static ITask<TResult> HandleAsDefaultWhenException<TResult>(this ITask<TResult> task)
+        public static Task<TResult> HandleAsDefaultWhenException<TResult>(this Task<TResult> task)
         {
 #nullable disable
             return task.Handle().WhenCatch<Exception>(ex => default);
@@ -82,7 +82,7 @@ namespace EzrealClient
         /// <param name="task"></param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <returns></returns>
-        public static IHandleTask<TResult> Handle<TResult>(this ITask<TResult> task)
+        public static IHandleTask<TResult> Handle<TResult>(this Task<TResult> task)
         {
             if (task == null)
             {

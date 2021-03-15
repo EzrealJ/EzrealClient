@@ -19,7 +19,7 @@ namespace EzrealClient.Implementations
         /// <param name="context"></param>
         /// <exception cref="ApiInvalidConfigException"></exception>
         /// <returns></returns>
-        public static async Task<ApiResponseContext> SendAsync(ApiRequestContext context)
+        public static async System.Threading.Tasks.Task<ApiResponseContext> SendAsync(ApiRequestContext context)
         {
             if (context.HttpContext.RequestMessage.RequestUri == null)
             {
@@ -69,7 +69,7 @@ namespace EzrealClient.Implementations
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        private static async Task<ActionCache?> GetCaheAsync(this ApiRequestContext context)
+        private static async System.Threading.Tasks.Task<ActionCache?> GetCaheAsync(this ApiRequestContext context)
         {
             var attribute = context.ActionDescriptor.CacheAttribute;
             if (attribute == null)

@@ -151,7 +151,7 @@ namespace EzrealClient.HttpContents
         /// 创建只读流
         /// </summary>
         /// <returns></returns>
-        protected override Task<Stream> CreateContentReadStreamAsync()
+        protected override System.Threading.Tasks.Task<Stream> CreateContentReadStreamAsync()
         {
             var segment = this.bufferWriter.WrittenSegment;
             var readStream = new MemoryStream(segment.Array, segment.Offset, segment.Count, writable: false);
@@ -186,7 +186,7 @@ namespace EzrealClient.HttpContents
         /// <param name="httpContent">httpContent实例</param>
         /// <param name="disposeHttpContent">是否释放httpContent</param>
         /// <returns></returns>
-        public static async Task<FormContent> ParseAsync(HttpContent? httpContent, bool disposeHttpContent = true)
+        public static async System.Threading.Tasks.Task<FormContent> ParseAsync(HttpContent? httpContent, bool disposeHttpContent = true)
         {
             if (httpContent == null)
             {

@@ -19,7 +19,7 @@ namespace EzrealClient.HttpMessageHandlers
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected sealed override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected sealed override async System.Threading.Tasks.Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             var response = await this.SendAsync(SetReason.ForSend, request, cancellationToken).ConfigureAwait(false);
             if (await this.IsUnauthorizedAsync(response).ConfigureAwait(false) == true)
@@ -36,7 +36,7 @@ namespace EzrealClient.HttpMessageHandlers
         /// <param name="request">请求消息</param>
         /// <param name="cancellationToken">取消令牌</param>
         /// <returns></returns>
-        private async Task<HttpResponseMessage> SendAsync(SetReason reason, HttpRequestMessage request, CancellationToken cancellationToken)
+        private async System.Threading.Tasks.Task<HttpResponseMessage> SendAsync(SetReason reason, HttpRequestMessage request, CancellationToken cancellationToken)
         {
             await this.SetAuthorizationAsync(reason, request, cancellationToken).ConfigureAwait(false);
             return await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
@@ -56,7 +56,7 @@ namespace EzrealClient.HttpMessageHandlers
         /// 反回true则触发重试请求
         /// </summary>
         /// <param name="response">响应消息</param> 
-        protected virtual Task<bool> IsUnauthorizedAsync(HttpResponseMessage response)
+        protected virtual System.Threading.Tasks.Task<bool> IsUnauthorizedAsync(HttpResponseMessage response)
         {
             var state = response != null && response.StatusCode == HttpStatusCode.Unauthorized;
             return Task.FromResult(state);

@@ -52,10 +52,17 @@ namespace App
                 .UseSourceGeneratorHttpApiActivator()
                 .UseFluentConfigure(builder => {
                     builder.SetCacheAttribute(new CacheAttribute(500));
-                    builder.ConfigureInterface<IUserApi>(interfaceBuilder=> {                       
+                    builder.ConfigureInterface<IUserApi>(interfaceBuilder=> {
+                        interfaceBuilder.SetCacheAttribute(new CacheAttribute(1000));
                         interfaceBuilder.ConfigureMethod(nameof(IUserApi.GetAsync), methodBuilder =>
                         {
-                            //methodBuilder
+                            //methodBuilder.
+                            methodBuilder.SetCacheAttribute(new CacheAttribute(5000));
+                            methodBuilder.ConfigureParameter("account", parameterBuilder =>
+                            {
+                                parameterBuilder.AliasAs("ук╨е");
+
+                            });
                         });
 
 

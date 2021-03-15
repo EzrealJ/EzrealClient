@@ -94,7 +94,7 @@ namespace EzrealClient.Attributes
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        private async Task<string?> ReadRequestContentAsync(HttpApiRequestMessage request)
+        private async System.Threading.Tasks.Task<string?> ReadRequestContentAsync(HttpApiRequestMessage request)
         {
             if (request.Content == null)
             {
@@ -111,7 +111,7 @@ namespace EzrealClient.Attributes
         /// </summary>
         /// <param name="context"></param>
         /// <returns></returns>
-        private async Task<string?> ReadResponseContentAsync(ApiResponseContext context)
+        private async System.Threading.Tasks.Task<string?> ReadResponseContentAsync(ApiResponseContext context)
         {
             var content = context.HttpContext.ResponseMessage?.Content;
             if (content == null)

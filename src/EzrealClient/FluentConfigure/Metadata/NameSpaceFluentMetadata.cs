@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Linq;
 
-namespace EzrealClient.FluentApi.Builders.Metadata
+namespace EzrealClient.FluentConfigure.Metadata
 {
     public class NameSpaceFluentMetadata:IFluentMethodAnnotableMetadata
     {
@@ -44,6 +44,35 @@ namespace EzrealClient.FluentApi.Builders.Metadata
         public virtual IEnumerable<InterfaceFluentMetadata> Interfaces { get; protected set; }
 
 
+        public virtual InterfaceFluentMetadata GetOrAddInterfaceMetadata<TInterface>() => GetOrAddInterfaceMetadata(typeof(TInterface));
+        public virtual InterfaceFluentMetadata GetOrAddInterfaceMetadata(Type interfaceType)
+        {
+            if (interfaceType is null)
+            {
+                throw new ArgumentNullException(nameof(interfaceType));
+            }
+
+            if (!interfaceType.IsInterface)
+            {
+                var message = Resx.required_InterfaceType;
+                throw new NotSupportedException(message);
+            }
+            if (!interfaceType.IsPublic)
+            {
+                var message = Resx.required_PublicInterface;
+                throw new NotSupportedException(message);
+            }
+
+            InterfaceFluentMetadata? metadata = Interfaces.FirstOrDefault(a => a.InterfaceType == interfaceType);
+            if (metadata == null)
+            {
+                metadata = new InterfaceFluentMetadata(interfaceType, this);
+                ((List<InterfaceFluentMetadata>)Interfaces).Add(metadata);
+            }
+            return metadata;
+        }
+
+
         public void SetCacheAttribute(IApiCacheAttribute apiCacheAttribute)
         {
             this.CacheAttribute = apiCacheAttribute;
@@ -79,7 +108,7 @@ namespace EzrealClient.FluentApi.Builders.Metadata
             return true;
         }
 
-        public bool TryAddPropertie(object key, object? value)
+        public bool TryAddPropertie(object key, object value)
         {
             return Properties.TryAdd(key, value);
         }

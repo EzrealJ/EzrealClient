@@ -62,6 +62,6 @@ namespace EzrealClient.HttpMessageHandlers
         /// 登录并刷新Cookie
         /// </summary>
         /// <returns>返回登录响应消息</returns>
-        protected abstract Task<HttpResponseMessage> RefreshCookieAsync();
+        protected abstract System.Threading.Tasks.Task<HttpResponseMessage> RefreshCookieAsync();
     }
 }

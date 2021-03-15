@@ -15,24 +15,24 @@ namespace EzrealClient.Test
     public interface IDescriptorApi : IHttpApi
     {
         [HttpGet]
-        [Timeout(10 * 1000)] 
-        Task<string> Get1([Uri] string url, string something);
-
-        [HttpGet] 
-        Task<HttpResponseMessage> Get2([Required]string id, CancellationToken token);
+        [Timeout(10 * 1000)]
+        System.Threading.Tasks.Task<string> Get1([Uri] string url, string something);
 
         [HttpGet]
-        Task<Stream> Get3([Required]string account, CancellationToken token);
+        System.Threading.Tasks.Task<HttpResponseMessage> Get2([Required]string id, CancellationToken token);
+
+        [HttpGet]
+        System.Threading.Tasks.Task<Stream> Get3([Required]string account, CancellationToken token);
          
         [HttpPost]
         Task Get4();
 
-        [HttpGet] 
-        Task<object> Get5(string nickName);
+        [HttpGet]
+        System.Threading.Tasks.Task<object> Get5(string nickName);
 
 
         [HttpGet]
-        Task<byte[]> Get6(string nickName);
+        System.Threading.Tasks.Task<byte[]> Get6(string nickName);
 
     }
 }

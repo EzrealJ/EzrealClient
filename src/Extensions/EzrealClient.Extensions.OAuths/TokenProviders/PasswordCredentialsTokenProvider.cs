@@ -24,7 +24,7 @@ namespace EzrealClient.Extensions.OAuths.TokenProviders
         /// </summary>
         /// <param name="serviceProvider"></param>
         /// <returns></returns>
-        protected override Task<TokenResult?> RequestTokenAsync(IServiceProvider serviceProvider)
+        protected override System.Threading.Tasks.Task<TokenResult?> RequestTokenAsync(IServiceProvider serviceProvider)
         {
             var options = this.GetOptionsValue<PasswordCredentialsOptions>();
             if (options.Endpoint == null)
@@ -42,7 +42,7 @@ namespace EzrealClient.Extensions.OAuths.TokenProviders
         /// <param name="serviceProvider"></param>
         /// <param name="refresh_token"></param>
         /// <returns></returns>
-        protected override Task<TokenResult?> RefreshTokenAsync(IServiceProvider serviceProvider, string refresh_token)
+        protected override System.Threading.Tasks.Task<TokenResult?> RefreshTokenAsync(IServiceProvider serviceProvider, string refresh_token)
         {
             var options = this.GetOptionsValue<PasswordCredentialsOptions>();
             if (options.Endpoint == null)

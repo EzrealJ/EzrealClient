@@ -7,6 +7,6 @@ namespace EzrealClient.Test.Attributes.ParameterAttributes
 {
     public interface IMyApi
     {
-        ITask<HttpResponseMessage> PostAsync(object headers);
+        Task<HttpResponseMessage> PostAsync(object headers);
     }
 }

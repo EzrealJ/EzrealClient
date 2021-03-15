@@ -1,35 +1,21 @@
-﻿using EzrealClient.FluentApi.Builders.Metadata;
+﻿using EzrealClient.FluentConfigure.Metadata;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace EzrealClient.FluentApi.Builders
+namespace EzrealClient.FluentConfigure.Builders
 {
-    public class FluentApiAttributesDescriptorBuilder
+    public class FluentConfigureAttributesDescriptorBuilder
     {
-        public FluentApiAttributesDescriptorBuilder()
+        public FluentConfigureAttributesDescriptorBuilder()
         {
             Metadata = new FluentMetadata();
         }
 
-        protected virtual FluentMetadata Metadata { get; }
+        internal virtual FluentMetadata Metadata { get; }
 
-        public virtual AssemblyFluentMetadata AssemblyMetadata(Assembly assembly)
-        {
-            if (assembly is null)
-            {
-                throw new ArgumentNullException(nameof(assembly));
-            }
 
-            AssemblyFluentMetadata metadata = Metadata.Assemblys.FirstOrDefault(a => a.Assembly == assembly);
-            if (metadata == null)
-            {
-                metadata = new AssemblyFluentMetadata(assembly);
-                ((List<AssemblyFluentMetadata>)Metadata.Assemblys).Add(metadata);
-            }
-            return metadata;
-        }
 
         public virtual AssemblyApiAttributesDescriptorBuilder Assembly(string assemblyName)
         {
@@ -43,7 +29,7 @@ namespace EzrealClient.FluentApi.Builders
 
         public virtual AssemblyApiAttributesDescriptorBuilder Assembly(Assembly assembly)
         {
-            var metadata = AssemblyMetadata(assembly);
+            var metadata = Metadata.GetOrAddAssemblyMetadata(assembly);
             return new AssemblyApiAttributesDescriptorBuilder(metadata);
         }
 
@@ -90,7 +76,7 @@ namespace EzrealClient.FluentApi.Builders
             return Assembly(assembly).NameSpace(@namespace).Interface<TInterface>();
         }
 
-        public virtual FluentApiAttributesDescriptorBuilder ConfigureAssembly(string assemblyName,Action<AssemblyApiAttributesDescriptorBuilder> buildAction)
+        public virtual FluentConfigureAttributesDescriptorBuilder ConfigureAssembly(string assemblyName, Action<AssemblyApiAttributesDescriptorBuilder> buildAction)
         {
             if (buildAction is null)
             {
@@ -99,7 +85,7 @@ namespace EzrealClient.FluentApi.Builders
             buildAction(Assembly(assemblyName));
             return this;
         }
-        public virtual FluentApiAttributesDescriptorBuilder ConfigureAssembly(Assembly assembly, Action<AssemblyApiAttributesDescriptorBuilder> buildAction)
+        public virtual FluentConfigureAttributesDescriptorBuilder ConfigureAssembly(Assembly assembly, Action<AssemblyApiAttributesDescriptorBuilder> buildAction)
         {
             if (buildAction is null)
             {
@@ -109,7 +95,7 @@ namespace EzrealClient.FluentApi.Builders
             return this;
         }
 
-        public virtual FluentApiAttributesDescriptorBuilder ConfigureInterface(Type interfaceType,Action<InterfaceApiAttributesDescriptorBuilder> buildAction)
+        public virtual FluentConfigureAttributesDescriptorBuilder ConfigureInterface(Type interfaceType, Action<InterfaceApiAttributesDescriptorBuilder> buildAction)
         {
             if (buildAction is null)
             {
@@ -118,7 +104,7 @@ namespace EzrealClient.FluentApi.Builders
             buildAction(Interface(interfaceType));
             return this;
         }
-        public virtual FluentApiAttributesDescriptorBuilder ConfigureInterface<TInterface>(Action<InterfaceApiAttributesDescriptorBuilder> buildAction)
+        public virtual FluentConfigureAttributesDescriptorBuilder ConfigureInterface<TInterface>(Action<InterfaceApiAttributesDescriptorBuilder> buildAction)
         {
             if (buildAction is null)
             {
@@ -129,33 +115,33 @@ namespace EzrealClient.FluentApi.Builders
         }
 
 
-        public FluentApiAttributesDescriptorBuilder SetCacheAttribute(IApiCacheAttribute apiCacheAttribute)
+        public FluentConfigureAttributesDescriptorBuilder SetCacheAttribute(IApiCacheAttribute apiCacheAttribute)
         {
             Metadata.SetCacheAttribute(apiCacheAttribute);
             return this;
         }
 
-        public FluentApiAttributesDescriptorBuilder TryAddApiActionAttribute(IApiActionAttribute apiActionAttribute)
+        public FluentConfigureAttributesDescriptorBuilder TryAddApiActionAttribute(IApiActionAttribute apiActionAttribute)
         {
             Metadata.TryAddApiActionAttribute(apiActionAttribute);
             return this;
         }
 
-        public FluentApiAttributesDescriptorBuilder TryAddApiFilterAttribute(IApiFilterAttribute apiFilterAttribute)
+        public FluentConfigureAttributesDescriptorBuilder TryAddApiFilterAttribute(IApiFilterAttribute apiFilterAttribute)
         {
             Metadata.TryAddApiFilterAttribute(apiFilterAttribute);
             return this;
         }
 
-        public FluentApiAttributesDescriptorBuilder TryAddApiReturnAttribute(IApiReturnAttribute apiReturnAttribute)
+        public FluentConfigureAttributesDescriptorBuilder TryAddApiReturnAttribute(IApiReturnAttribute apiReturnAttribute)
         {
             Metadata.TryAddApiReturnAttribute(apiReturnAttribute);
             return this;
         }
 
-        public FluentApiAttributesDescriptorBuilder TryAddPropertie(object key, object? value)
+        public FluentConfigureAttributesDescriptorBuilder TryAddPropertie(object key, object value)
         {
-            Metadata.TryAddPropertie(key,value);
+            Metadata.TryAddPropertie(key, value);
             return this;
         }
 

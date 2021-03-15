@@ -14,7 +14,7 @@ namespace EzrealClient.Benchmarks.Requests
         /// </summary>
         /// <returns></returns>
         [Benchmark]
-        public async Task<Model> EzrealClient_PutFormAsync()
+        public async System.Threading.Tasks.Task<Model> EzrealClient_PutFormAsync()
         {
             using var scope = this.ServiceProvider.CreateScope();
             var banchmarkApi = scope.ServiceProvider.GetRequiredService<IEzrealClientApi>();
@@ -24,7 +24,7 @@ namespace EzrealClient.Benchmarks.Requests
 
 
         [Benchmark]
-        public async Task<Model> Refit_PutFormAsync()
+        public async System.Threading.Tasks.Task<Model> Refit_PutFormAsync()
         {
             using var scope = this.ServiceProvider.CreateScope();
             var banchmarkApi = scope.ServiceProvider.GetRequiredService<IRefitApi>();

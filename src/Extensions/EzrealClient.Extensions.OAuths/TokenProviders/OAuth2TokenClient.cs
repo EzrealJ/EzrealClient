@@ -37,7 +37,7 @@ namespace EzrealClient.Extensions.OAuths.TokenProviders
         /// <returns></returns>
         [HttpPost]
         [FormField("grant_type", "client_credentials")]
-        public Task<TokenResult?> RequestTokenAsync([Required, Uri] Uri endpoint, [Required, FormContent] ClientCredentials credentials)
+        public System.Threading.Tasks.Task<TokenResult?> RequestTokenAsync([Required, Uri] Uri endpoint, [Required, FormContent] ClientCredentials credentials)
         {
             return this.PostFormAsync(endpoint, "client_credentials", credentials);
         }
@@ -50,7 +50,7 @@ namespace EzrealClient.Extensions.OAuths.TokenProviders
         /// <returns></returns>
         [HttpPost]
         [FormField("grant_type", "password")]
-        public Task<TokenResult?> RequestTokenAsync([Required, Uri] Uri endpoint, [Required, FormContent] PasswordCredentials credentials)
+        public System.Threading.Tasks.Task<TokenResult?> RequestTokenAsync([Required, Uri] Uri endpoint, [Required, FormContent] PasswordCredentials credentials)
         {
             return this.PostFormAsync(endpoint, "password", credentials);
         }
@@ -63,7 +63,7 @@ namespace EzrealClient.Extensions.OAuths.TokenProviders
         /// <returns></returns>
         [HttpPost]
         [FormField("grant_type", "refresh_token")]
-        public Task<TokenResult?> RefreshTokenAsync([Required, Uri] Uri endpoint, [Required, FormContent] RefreshTokenCredentials credentials)
+        public System.Threading.Tasks.Task<TokenResult?> RefreshTokenAsync([Required, Uri] Uri endpoint, [Required, FormContent] RefreshTokenCredentials credentials)
         {
             return this.PostFormAsync(endpoint, "refresh_token", credentials);
         }
@@ -76,7 +76,7 @@ namespace EzrealClient.Extensions.OAuths.TokenProviders
         /// <param name="grant_type"></param>
         /// <param name="credentials"></param>
         /// <returns></returns>
-        private async Task<TokenResult?> PostFormAsync<TCredentials>(Uri endpoint, string grant_type, TCredentials credentials)
+        private async System.Threading.Tasks.Task<TokenResult?> PostFormAsync<TCredentials>(Uri endpoint, string grant_type, TCredentials credentials)
         {
             using var formContent = new FormContent(credentials, this.httpApiOptions.KeyValueSerializeOptions);
             formContent.AddFormField(new KeyValue("grant_type", grant_type));

@@ -21,6 +21,6 @@ namespace EzrealClient.Extensions.OAuths
         /// 获取token信息
         /// </summary> 
         /// <returns></returns>
-        Task<TokenResult> GetTokenAsync();
+        System.Threading.Tasks.Task<TokenResult> GetTokenAsync();
     }
 }

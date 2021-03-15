@@ -1,13 +1,10 @@
-﻿using EzrealClient.FluentApi.Builders.Metadata;
+﻿using EzrealClient.FluentConfigure.Metadata;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Net.Http;
 using System.Reflection;
-using System.Threading.Tasks;
 
-namespace EzrealClient.FluentApi.Builders
+namespace EzrealClient.FluentConfigure.Builders
 {
     public class InterfaceApiAttributesDescriptorBuilder
     {
@@ -16,39 +13,26 @@ namespace EzrealClient.FluentApi.Builders
             Metadata = metadata;
         }
 
-        protected virtual InterfaceFluentMetadata Metadata { get; }
+        internal virtual InterfaceFluentMetadata Metadata { get; }
 
-        protected virtual MethodFluentMetadata MethodMetadata(MethodInfo method)
-        {
-            if (method is null)
-            {
-                throw new System.ArgumentNullException(nameof(method));
-            }
-            MethodFluentMetadata? metadata = Metadata.Methods.FirstOrDefault(a => a.Member == method);
-            if (metadata == null)
-            {
-                metadata = new MethodFluentMetadata(method, Metadata);
-                ((List<MethodFluentMetadata>)Metadata.Methods).Add(metadata);
-            }
-            return metadata;
-        }
+
 
         public virtual MethodApiAttributesDescriptorBuilder Method(MethodInfo method)
         {
-            var matadata = MethodMetadata(method);
+            var matadata = Metadata.GetOrAddMethodMetadata(method);
             return new MethodApiAttributesDescriptorBuilder(matadata);
         }
 
         public virtual MethodApiAttributesDescriptorBuilder Method(string methodName)
         {
-            return Method(methodName, Array.Empty<Type>());
+            var methodInfo = Metadata.InterfaceType.GetMethod(methodName);
+            return Method(methodInfo);
         }
 
         public virtual MethodApiAttributesDescriptorBuilder Method(string methodName,params Type[] types)
         {
-            var method = Metadata.InterfaceType.GetMethod(methodName, types);
-            var matadata = MethodMetadata(method);
-            return new MethodApiAttributesDescriptorBuilder(matadata);
+            var methodInfo = Metadata.InterfaceType.GetMethod(methodName, types);
+            return Method(methodInfo);
         }
 
         public virtual InterfaceApiAttributesDescriptorBuilder ConfigureMethod(string methodName, Action<MethodApiAttributesDescriptorBuilder> buildAction)
@@ -57,7 +41,7 @@ namespace EzrealClient.FluentApi.Builders
             {
                 throw new ArgumentNullException(nameof(buildAction));
             }
-            buildAction(Method(methodName, Array.Empty<Type>()));
+            buildAction(Method(methodName));
             return this;
         }
         public virtual InterfaceApiAttributesDescriptorBuilder ConfigureMethod(string methodName, Type[] types, Action<MethodApiAttributesDescriptorBuilder> buildAction)
@@ -94,7 +78,7 @@ namespace EzrealClient.FluentApi.Builders
             return this;
         }
 
-        public InterfaceApiAttributesDescriptorBuilder TryAddPropertie(object key, object? value)
+        public InterfaceApiAttributesDescriptorBuilder TryAddPropertie(object key, object value)
         {
             Metadata.TryAddPropertie(key, value);
             return this;

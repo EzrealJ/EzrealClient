@@ -159,7 +159,7 @@ namespace EzrealClient
             }
 
             var taskType = method.ReturnType.GetGenericTypeDefinition();
-            return taskType == typeof(ITask<>);
+            return taskType == typeof(Task<>);
         }
     }
 }

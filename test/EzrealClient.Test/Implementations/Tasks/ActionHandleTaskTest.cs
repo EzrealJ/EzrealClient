@@ -9,7 +9,7 @@ namespace EzrealClient.Test.Implementations.Tasks
     {
         class NotImplementedApiTask<T> : TaskBase<T>
         {
-            protected override Task<T> InvokeAsync()
+            protected override System.Threading.Tasks.Task<T> InvokeAsync()
             {
                 throw new NotImplementedException();
             }

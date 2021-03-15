@@ -1,9 +1,9 @@
-﻿using EzrealClient.FluentApi.Builders.Metadata;
+﻿using EzrealClient.FluentConfigure.Metadata;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace EzrealClient.FluentApi.Builders
+namespace EzrealClient.FluentConfigure.Builders
 {
     public class NameSpaceApiAttributesDescriptorBuilder
     {
@@ -12,47 +12,21 @@ namespace EzrealClient.FluentApi.Builders
             Metadata = metadata;
         }
 
-        protected virtual NameSpaceFluentMetadata Metadata { get; }
+        internal virtual NameSpaceFluentMetadata Metadata { get; }
 
 
 
-        protected virtual InterfaceFluentMetadata InterfaceMetadata<TInterface>() => InterfaceMetadata(typeof(TInterface));
-        protected virtual InterfaceFluentMetadata InterfaceMetadata(Type interfaceType)
-        {
-            if (interfaceType is null)
-            {
-                throw new ArgumentNullException(nameof(interfaceType));
-            }
 
-            if (!interfaceType.IsInterface)
-            {
-                var message = Resx.required_InterfaceType;
-                throw new NotSupportedException(message);
-            }
-            if (!interfaceType.IsPublic)
-            {
-                var message = Resx.required_PublicInterface;
-                throw new NotSupportedException(message);
-            }
-
-            InterfaceFluentMetadata? metadata = Metadata.Interfaces.FirstOrDefault(a => a.InterfaceType == interfaceType);
-            if (metadata == null)
-            {
-                metadata = new InterfaceFluentMetadata(interfaceType, Metadata);
-                ((List<InterfaceFluentMetadata>)Metadata.Interfaces).Add(metadata);
-            }
-            return metadata;
-        }
 
 
         public virtual InterfaceApiAttributesDescriptorBuilder Interface(Type interfaceType)
         {
-            var matadata = InterfaceMetadata(interfaceType);
+            var matadata = Metadata.GetOrAddInterfaceMetadata(interfaceType);
             return new InterfaceApiAttributesDescriptorBuilder(matadata);
         }
         public virtual InterfaceApiAttributesDescriptorBuilder<TInterface> Interface<TInterface>()
         {
-            var matadata = InterfaceMetadata(typeof(TInterface));
+            var matadata = Metadata.GetOrAddInterfaceMetadata<TInterface>();
             return new InterfaceApiAttributesDescriptorBuilder<TInterface>(matadata);
         }
 
@@ -100,7 +74,7 @@ namespace EzrealClient.FluentApi.Builders
             return this;
         }
 
-        public NameSpaceApiAttributesDescriptorBuilder TryAddPropertie(object key, object? value)
+        public NameSpaceApiAttributesDescriptorBuilder TryAddPropertie(object key, object value)
         {
             Metadata.TryAddPropertie(key, value);
             return this;

@@ -18,7 +18,7 @@ namespace EzrealClient
         /// <param name="context"></param>
         /// <param name="objType">目标类型</param>
         /// <returns></returns>
-        public static async Task<object?> JsonDeserializeAsync(this ApiResponseContext context, Type objType)
+        public static async System.Threading.Tasks.Task<object?> JsonDeserializeAsync(this ApiResponseContext context, Type objType)
         {
             var response = context.HttpContext.ResponseMessage;
             if (response == null)
@@ -61,7 +61,7 @@ namespace EzrealClient
         /// <param name="context"></param>
         /// <param name="objType">目标类型</param>
         /// <returns></returns>
-        public static async Task<object?> XmlDeserializeAsync(this ApiResponseContext context, Type objType)
+        public static async System.Threading.Tasks.Task<object?> XmlDeserializeAsync(this ApiResponseContext context, Type objType)
         {
             var response = context.HttpContext.ResponseMessage;
             if (response == null)

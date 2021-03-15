@@ -53,7 +53,7 @@ namespace EzrealClient.Implementations
         /// <param name="context">上下文</param>
         /// <param name="arguments">参数值</param>
         /// <returns></returns>
-        public virtual async Task<TResult> InvokeAsync(HttpClientContext context, object?[] arguments)
+        public virtual async System.Threading.Tasks.Task<TResult> InvokeAsync(HttpClientContext context, object?[] arguments)
         {
             try
             {
@@ -81,7 +81,7 @@ namespace EzrealClient.Implementations
         /// </summary>
         /// <param name="request"></param>
         /// <returns></returns>
-        private async Task<TResult> InvokeAsync(ApiRequestContext request)
+        private async System.Threading.Tasks.Task<TResult> InvokeAsync(ApiRequestContext request)
         {
 #nullable disable
             var response = await ApiRequestExecuter.ExecuteAsync(request).ConfigureAwait(false);

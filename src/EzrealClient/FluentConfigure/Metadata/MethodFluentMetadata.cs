@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Linq;
 
-namespace EzrealClient.FluentApi.Builders.Metadata
+namespace EzrealClient.FluentConfigure.Metadata
 {
     /// <summary>
     /// Method级别的FluentMetadata
@@ -39,7 +39,7 @@ namespace EzrealClient.FluentApi.Builders.Metadata
         /// <summary>
         /// 获取所在接口类型
         /// </summary>
-        public virtual Type InterfaceType => Member.DeclaringType;
+        public virtual Type InterfaceType => InterfaceMetadata.InterfaceType;
 
         /// <summary>
         /// 获取Api名称
@@ -53,7 +53,21 @@ namespace EzrealClient.FluentApi.Builders.Metadata
         public InterfaceFluentMetadata InterfaceMetadata { get; }
         public virtual IEnumerable<ParameterFluentMetadata> Parameters { get; protected set; }
 
+        public virtual ParameterFluentMetadata GetOrAddParameterMetadata(ParameterInfo parameterInfo)
+        {
+            if (parameterInfo is null)
+            {
+                throw new ArgumentNullException(nameof(parameterInfo));
+            }
 
+            ParameterFluentMetadata? metadata = Parameters.FirstOrDefault(a => a.Member == parameterInfo);
+            if (metadata == null)
+            {
+                metadata = new ParameterFluentMetadata(parameterInfo, this);
+                ((List<ParameterFluentMetadata>)Parameters).Add(metadata);
+            }
+            return metadata;
+        }
         public void SetCacheAttribute(IApiCacheAttribute apiCacheAttribute)
         {
             this.CacheAttribute = apiCacheAttribute;
@@ -89,7 +103,7 @@ namespace EzrealClient.FluentApi.Builders.Metadata
             return true;
         }
 
-        public bool TryAddPropertie(object key, object? value)
+        public bool TryAddPropertie(object key, object value)
         {
             return Properties.TryAdd(key, value);
         }

@@ -5,12 +5,12 @@ namespace EzrealClient.Test.Attributes.ReturnAttributes
 {
     public interface ITestApi
     {
-        Task<HttpResponseMessage> HttpResponseMessageAsync();
+        System.Threading.Tasks.Task<HttpResponseMessage> HttpResponseMessageAsync();
 
-        Task<string> StringAsync();
+        System.Threading.Tasks.Task<string> StringAsync();
 
-        Task<byte[]> ByteArrayAsync();
+        System.Threading.Tasks.Task<byte[]> ByteArrayAsync();
 
-        Task<TestModel> JsonXmlAsync();
+        System.Threading.Tasks.Task<TestModel> JsonXmlAsync();
     }
 }

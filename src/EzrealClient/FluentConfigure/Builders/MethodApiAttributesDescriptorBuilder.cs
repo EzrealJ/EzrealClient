@@ -1,11 +1,10 @@
-﻿using EzrealClient.FluentApi.Builders.Metadata;
+﻿using EzrealClient.FluentConfigure.Metadata;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
-namespace EzrealClient.FluentApi.Builders
+namespace EzrealClient.FluentConfigure.Builders
 {
     public class MethodApiAttributesDescriptorBuilder
     {
@@ -14,32 +13,29 @@ namespace EzrealClient.FluentApi.Builders
             Metadata = metadata;
         }
 
-        protected virtual MethodFluentMetadata Metadata { get; }
+        internal virtual MethodFluentMetadata Metadata { get; }
 
 
-        protected virtual ParameterFluentMetadata ParameterMetadata(ParameterInfo parameterInfo)
-        {
-            if (parameterInfo is null)
-            {
-                throw new ArgumentNullException(nameof(parameterInfo));
-            }
 
-            ParameterFluentMetadata? metadata = Metadata.Parameters.FirstOrDefault(a => a.Member == parameterInfo);
-            if (metadata == null)
-            {
-                metadata = new ParameterFluentMetadata(parameterInfo, Metadata);
-                ((List<ParameterFluentMetadata>)Metadata.Parameters).Add(metadata);
-            }
-            return metadata;
-        }
-        public virtual ParameterAttributesDescriptorBuilder Method(string parameterName)
+        public virtual ParameterAttributesDescriptorBuilder Parameter(string parameterName)
         {
             var parameterInfo = Metadata.Member.GetParameters().FirstOrDefault(p => p.Name == parameterName);
-            return Method(parameterInfo);
+            return Parameter(parameterInfo);
         }
-        public virtual ParameterAttributesDescriptorBuilder Method(ParameterInfo parameterInfo)
+        public virtual ParameterAttributesDescriptorBuilder Parameter(ParameterInfo parameterInfo)
         {
-            return new ParameterAttributesDescriptorBuilder(ParameterMetadata(parameterInfo));
+            return new ParameterAttributesDescriptorBuilder(Metadata.GetOrAddParameterMetadata(parameterInfo));
+        }
+
+
+        public virtual MethodApiAttributesDescriptorBuilder ConfigureParameter(string parameterName, Action<ParameterAttributesDescriptorBuilder> buildAction)
+        {
+            if (buildAction is null)
+            {
+                throw new ArgumentNullException(nameof(buildAction));
+            }
+            buildAction(Parameter(parameterName));
+            return this;
         }
         public MethodApiAttributesDescriptorBuilder SetCacheAttribute(IApiCacheAttribute apiCacheAttribute)
         {
@@ -65,7 +61,7 @@ namespace EzrealClient.FluentApi.Builders
             return this;
         }
 
-        public MethodApiAttributesDescriptorBuilder TryAddPropertie(object key, object? value)
+        public MethodApiAttributesDescriptorBuilder TryAddPropertie(object key, object value)
         {
             Metadata.TryAddPropertie(key, value);
             return this;

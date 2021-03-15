@@ -19,7 +19,7 @@ namespace EzrealClient.Benchmarks.Requests
             this.json = JsonSerializer.SerializeToUtf8Bytes(model);
         }
 
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override System.Threading.Tasks.Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
             var response = new HttpResponseMessage(HttpStatusCode.OK) { Content = new ByteArrayJsonContent(this.json) };
             return Task.FromResult(response);

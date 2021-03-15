@@ -3,7 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Text;
 
-namespace EzrealClient.FluentApi.Builders.Metadata
+namespace EzrealClient.FluentConfigure.Metadata
 {
     /// <summary>
     /// 流式Api元数据
@@ -38,6 +38,6 @@ namespace EzrealClient.FluentApi.Builders.Metadata
         bool TryAddApiActionAttribute(IApiActionAttribute apiActionAttribute);
         bool TryAddApiFilterAttribute(IApiFilterAttribute apiFilterAttribute);
         bool TryAddApiReturnAttribute(IApiReturnAttribute apiReturnAttribute);
-        bool TryAddPropertie(object key, object? value);
+        bool TryAddPropertie(object key, object value);
     }
 }

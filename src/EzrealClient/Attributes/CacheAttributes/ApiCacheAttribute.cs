@@ -71,6 +71,6 @@ namespace EzrealClient.Attributes
         /// </summary>
         /// <param name="context">上下文</param>
         /// <returns></returns>
-        public abstract Task<string> GetCacheKeyAsync(ApiRequestContext context);
+        public abstract System.Threading.Tasks.Task<string> GetCacheKeyAsync(ApiRequestContext context);
     }
 }

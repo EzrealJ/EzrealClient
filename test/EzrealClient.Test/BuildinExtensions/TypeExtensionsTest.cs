@@ -27,17 +27,17 @@ namespace EzrealClient.Test.BuildinExtensions
 
         public interface IGet
         {
-            ITask<string> Get();
+            Task<string> Get();
         }
 
         public interface IPost
         {
-            ITask<string> Post();
+            Task<string> Post();
         }
 
         public interface IMyApi : IGet, IPost
         {
-            ITask<int> Delete();
+            Task<int> Delete();
         }
 
         [Fact]

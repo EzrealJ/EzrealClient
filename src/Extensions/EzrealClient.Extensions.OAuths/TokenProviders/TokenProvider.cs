@@ -66,7 +66,7 @@ namespace EzrealClient.Extensions.OAuths.TokenProviders
         /// 获取token信息
         /// </summary> 
         /// <returns></returns>
-        public async Task<TokenResult> GetTokenAsync()
+        public async System.Threading.Tasks.Task<TokenResult> GetTokenAsync()
         {
             using (await this.asyncRoot.LockAsync().ConfigureAwait(false))
             {
@@ -98,7 +98,7 @@ namespace EzrealClient.Extensions.OAuths.TokenProviders
         /// </summary> 
         /// <param name="serviceProvider">服务提供者</param>
         /// <returns></returns>
-        protected abstract Task<TokenResult?> RequestTokenAsync(IServiceProvider serviceProvider);
+        protected abstract System.Threading.Tasks.Task<TokenResult?> RequestTokenAsync(IServiceProvider serviceProvider);
 
         /// <summary>
         /// 刷新token
@@ -106,7 +106,7 @@ namespace EzrealClient.Extensions.OAuths.TokenProviders
         /// <param name="serviceProvider">服务提供者</param>
         /// <param name="refresh_token">刷新token</param>
         /// <returns></returns>
-        protected abstract Task<TokenResult?> RefreshTokenAsync(IServiceProvider serviceProvider, string refresh_token);
+        protected abstract System.Threading.Tasks.Task<TokenResult?> RefreshTokenAsync(IServiceProvider serviceProvider, string refresh_token);
 
         /// <summary>
         /// 转换为string

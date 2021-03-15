@@ -7,7 +7,7 @@ namespace EzrealClient
     /// 定义异常处理的行为
     /// </summary>
     /// <typeparam name="TResult"></typeparam>
-    public interface IHandleTask<TResult> : ITask<TResult>
+    public interface IHandleTask<TResult> : Task<TResult>
     {
         /// <summary>
         /// 当捕获到异常时返回指定结果
@@ -31,6 +31,6 @@ namespace EzrealClient
         /// <typeparam name="TException"></typeparam>
         /// <param name="func">获取结果</param>
         /// <returns></returns>
-        IHandleTask<TResult> WhenCatchAsync<TException>(Func<TException, Task<TResult>> func) where TException : Exception;
+        IHandleTask<TResult> WhenCatchAsync<TException>(Func<TException, System.Threading.Tasks.Task<TResult>> func) where TException : Exception;
     }
 }

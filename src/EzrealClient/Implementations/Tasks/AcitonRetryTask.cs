@@ -13,7 +13,7 @@ namespace EzrealClient.Implementations.Tasks
         /// <summary>
         /// 请求任务创建的委托
         /// </summary>
-        private readonly Func<Task<TResult>> invoker;
+        private readonly Func<System.Threading.Tasks.Task<TResult>> invoker;
 
         /// <summary>
         /// 获取最大重试次数
@@ -32,7 +32,7 @@ namespace EzrealClient.Implementations.Tasks
         /// <param name="maxRetryCount">最大尝试次数</param>
         /// <param name="retryDelay">各次重试的延时时间</param>
         /// <exception cref="ArgumentOutOfRangeException"></exception>
-        public AcitonRetryTask(Func<Task<TResult>> invoker, int maxRetryCount, Func<int, TimeSpan>? retryDelay)
+        public AcitonRetryTask(Func<System.Threading.Tasks.Task<TResult>> invoker, int maxRetryCount, Func<int, TimeSpan>? retryDelay)
         {
             if (maxRetryCount < 1)
             {
@@ -47,7 +47,7 @@ namespace EzrealClient.Implementations.Tasks
         /// 创建新的请求任务
         /// </summary>
         /// <returns></returns>
-        protected override async Task<TResult> InvokeAsync()
+        protected override async System.Threading.Tasks.Task<TResult> InvokeAsync()
         {
             var inner = default(Exception);
             for (var i = 0; i <= this.maxRetryCount; i++)
@@ -151,9 +151,9 @@ namespace EzrealClient.Implementations.Tasks
         /// <typeparam name="TException">异常类型</typeparam>
         /// <param name="predicate">返回true才Retry</param>
         /// <returns></returns>
-        public IRetryTask<TResult> WhenCatchAsync<TException>(Func<TException, Task<bool>> predicate) where TException : Exception
+        public IRetryTask<TResult> WhenCatchAsync<TException>(Func<TException, System.Threading.Tasks.Task<bool>> predicate) where TException : Exception
         {
-            async Task<TResult> newInvoker()
+            async System.Threading.Tasks.Task<TResult> newInvoker()
             {
                 try
                 {
@@ -163,7 +163,7 @@ namespace EzrealClient.Implementations.Tasks
                 {
                     if (predicate == null || await predicate.Invoke(ex).ConfigureAwait(false))
                     {
-                        throw new RetryMarkException(ex);
+                        throw new AcitonRetryTask<TResult>.RetryMarkException(ex);
                     }
                     throw;
                 }
@@ -195,20 +195,20 @@ namespace EzrealClient.Implementations.Tasks
         /// </summary>
         /// <param name="predicate">条件</param>
         /// <returns></returns>
-        public IRetryTask<TResult> WhenResultAsync(Func<TResult, Task<bool>> predicate)
+        public IRetryTask<TResult> WhenResultAsync(Func<TResult, System.Threading.Tasks.Task<bool>> predicate)
         {
             if (predicate == null)
             {
                 throw new ArgumentNullException(nameof(predicate));
             }
 
-            async Task<TResult> newInvoker()
+            async System.Threading.Tasks.Task<TResult> newInvoker()
             {
                 var result = await this.invoker.Invoke().ConfigureAwait(false);
                 if (await predicate.Invoke(result).ConfigureAwait(false) == true)
                 {
                     var inner = new ApiResultNotMatchException(Resx.unexpected_Result, result);
-                    throw new RetryMarkException(inner);
+                    throw new AcitonRetryTask<TResult>.RetryMarkException(inner);
                 }
                 return result;
             }

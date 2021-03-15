@@ -82,7 +82,7 @@ namespace EzrealClient.HttpContents
         /// 创建只读流
         /// </summary>
         /// <returns></returns>
-        protected override Task<Stream> CreateContentReadStreamAsync()
+        protected override System.Threading.Tasks.Task<Stream> CreateContentReadStreamAsync()
         {
             var segment = this.bufferWriter.WrittenSegment;
             var readStream = new MemoryStream(segment.Array, segment.Offset, segment.Count, writable: false);

@@ -7,7 +7,7 @@ namespace EzrealClient.Implementations.Tasks
     /// 表示Task抽象类
     /// </summary>
     /// <typeparam name="TResult"></typeparam>
-    abstract class TaskBase<TResult> : ITask<TResult>
+    abstract class TaskBase<TResult> : Task<TResult>
     {
         /// <summary>
         /// 返回新创建的请求任务的等待器 
@@ -32,6 +32,6 @@ namespace EzrealClient.Implementations.Tasks
         /// 创建新的请求任务
         /// </summary>
         /// <returns></returns>
-        protected abstract Task<TResult> InvokeAsync();
+        protected abstract System.Threading.Tasks.Task<TResult> InvokeAsync();
     }
 }

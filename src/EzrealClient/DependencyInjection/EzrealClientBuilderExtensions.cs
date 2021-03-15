@@ -2,7 +2,7 @@
 using EzrealClient;
 using EzrealClient.Implementations;
 using System;
-using EzrealClient.FluentApi.Builders;
+using EzrealClient.FluentConfigure.Builders;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -48,9 +48,10 @@ namespace Microsoft.Extensions.DependencyInjection
         }
 
 
-        public static IEzrealClientBuilder UseFluentConfigure(this IEzrealClientBuilder builder,Action<FluentApiAttributesDescriptorBuilder> builderAction)
+        public static IEzrealClientBuilder UseFluentConfigure(this IEzrealClientBuilder builder, Action<FluentConfigureAttributesDescriptorBuilder> builderAction)
         {
-            builder.Services.AddSingleton(builderAction);
+            builder.Services.AddSingleton<IApiActionDescriptorProvider, EzrealClient.FluentConfigure.FluentConfigureActionDescriptorProvider>();
+            builder.Services.TryAddSingleton(builderAction);
             return builder;
         }
         /// <summary>

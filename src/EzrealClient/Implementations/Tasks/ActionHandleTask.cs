@@ -12,13 +12,13 @@ namespace EzrealClient.Implementations.Tasks
         /// <summary>
         /// 请求任务创建的委托
         /// </summary>
-        private readonly Func<Task<TResult>> invoker;
+        private readonly Func<System.Threading.Tasks.Task<TResult>> invoker;
 
         /// <summary>
         /// 异常处理的请求任务
         /// </summary>
         /// <param name="invoker">请求任务创建的委托</param>
-        public ActionHandleTask(Func<Task<TResult>> invoker)
+        public ActionHandleTask(Func<System.Threading.Tasks.Task<TResult>> invoker)
         {
             this.invoker = invoker;
         }
@@ -27,7 +27,7 @@ namespace EzrealClient.Implementations.Tasks
         /// 创建请求任务
         /// </summary>
         /// <returns></returns>
-        protected override Task<TResult> InvokeAsync()
+        protected override System.Threading.Tasks.Task<TResult> InvokeAsync()
         {
             return this.invoker.Invoke();
         }
@@ -73,14 +73,14 @@ namespace EzrealClient.Implementations.Tasks
         /// <typeparam name="TException"></typeparam>
         /// <param name="func">获取结果</param>
         /// <returns></returns>
-        public IHandleTask<TResult> WhenCatchAsync<TException>(Func<TException, Task<TResult>> func) where TException : Exception
+        public IHandleTask<TResult> WhenCatchAsync<TException>(Func<TException, System.Threading.Tasks.Task<TResult>> func) where TException : Exception
         {
             if (func == null)
             {
                 throw new ArgumentNullException(nameof(func));
             }
 
-            async Task<TResult> newInvoker()
+            async System.Threading.Tasks.Task<TResult> newInvoker()
             {
                 try
                 {
