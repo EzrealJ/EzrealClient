@@ -15,11 +15,10 @@ namespace ConsoleApp
             services.AddLogging(builder => builder.AddConsole());
             services
                     .AddEzrealClient()
-                    .UseJsonFirstApiActionDescriptor()
                     .UseFluentConfigure(builder =>
                     {
                         builder.TryAddApiFilterAttribute(new LoggingFilterAttribute());
-                        builder.TryAddApiActionAttribute(new HttpHostAttribute("http://www.baidu.com"));
+                        builder.TryAddApiActionAttribute(new HttpHostAttribute("https://www.baidu.com"));
                         builder.SetCacheAttribute(new CacheAttribute(500));
                         builder.ConfigureInterface<ITestInterface>(interfaceBuilder =>
                         {
@@ -38,11 +37,7 @@ namespace ConsoleApp
                                 });
                                 methodBuilder.TryAddApiActionAttribute(new HttpPostAttribute("api/PostTest"));
                             });
-
-
                         });
-
-
                     });
             services.AddHttpApi<ITestInterface>();
             var sp = services.BuildServiceProvider();
@@ -50,10 +45,6 @@ namespace ConsoleApp
             i.Post("testValue", new TestClass { Age = 10, Name = "xiaoming" });
             Console.ReadKey();
         }
-
-
-
-
     }
 
     public class TestClass
